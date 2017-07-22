@@ -6,12 +6,12 @@
 
   <ng-container cdkColumnDef="startTime">
     <md-header-cell *cdkHeaderCellDef>Start Time</md-header-cell>
-    <md-cell *cdkCellDef="let event">{{ event.startTime | date:'medium' }}</md-cell>
+    <md-cell *cdkCellDef="let event">{{ event.startDateTime | date:'medium' }}</md-cell>
   </ng-container>
 
   <ng-container cdkColumnDef="endTime">
     <md-header-cell *cdkHeaderCellDef>End Time</md-header-cell>
-    <md-cell *cdkCellDef="let event">{{ event.endTime | date:'medium' }}</md-cell>
+    <md-cell *cdkCellDef="let event">{{ event.endDateTime | date:'medium' }}</md-cell>
   </ng-container>
 
   <ng-container cdkColumnDef="location">

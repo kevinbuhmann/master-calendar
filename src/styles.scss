@@ -1,4 +1,6 @@
 @import "~@angular/material/prebuilt-themes/deeppurple-amber";
+@import '~blueprint-css/src/blueprint';
+@import '~blueprint-css/src/_utility';
 
 $color-warn: #f44336;
 
@@ -14,10 +16,18 @@ body {
   width: 100%;
 }
 
+.no-margin {
+  margin: 0;
+}
+
 .warn-dialog .mat-dialog-container {
   background: 3px $color-warn solid;
 }
 
 .warn-snack-bar {
   background: $color-warn !important;
+}
+
+md-select.small .mat-select-trigger {
+  min-width: 50px;
 }

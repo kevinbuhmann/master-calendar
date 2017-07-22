@@ -9,23 +9,9 @@
       </md-error>
     </md-input-container>
 
-    <md-input-container class="full-width">
-      <input mdInput placeholder="Start Date" [formControlName]="controls.startTime" [mdDatepicker]="startTimePicker">
-      <md-error *ngIf="form.controls[controls.startTime].hasError('required')">
-        The event start date is <strong>required</strong>.
-      </md-error>
-      <button mdSuffix [mdDatepickerToggle]="startTimePicker"></button>
-    </md-input-container>
-    <md-datepicker #startTimePicker></md-datepicker>
+    <app-input-date-time placeholder="Start Date" timeStep="15" [formControlName]="controls.startDateTime"></app-input-date-time>
 
-    <md-input-container class="full-width">
-      <input mdInput placeholder="End Date" [formControlName]="controls.endTime" [mdDatepicker]="endTimePicker">
-      <md-error *ngIf="form.controls[controls.endTime].hasError('required')">
-        The event end date is <strong>required</strong>.
-      </md-error>
-      <button mdSuffix [mdDatepickerToggle]="endTimePicker"></button>
-    </md-input-container>
-    <md-datepicker #endTimePicker></md-datepicker>
+    <app-input-date-time placeholder="End Date" timeStep="15" [formControlName]="controls.endDateTime"></app-input-date-time>
 
     <md-input-container class="full-width">
       <input mdInput placeholder="Location" [formControlName]="controls.location">

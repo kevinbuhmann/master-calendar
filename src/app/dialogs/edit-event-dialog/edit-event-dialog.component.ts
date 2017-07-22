@@ -8,8 +8,8 @@ import { CalendarEvent, EventsService } from './../../shared/services/events.ser
 
 const controls = {
   name: 'name',
-  startTime: 'startTime',
-  endTime: 'endTime',
+  startDateTime: 'startDateTime',
+  endDateTime: 'endDateTime',
   location: 'location',
   description: 'description'
 };
@@ -35,8 +35,8 @@ export class EditEventDialogComponent extends BaseComponent {
 
     this.form = this.formBuilder.group({
       [controls.name]: ['', [Validators.required]],
-      [controls.startTime]: [new Date(), [Validators.required]],
-      [controls.endTime]: [addHours(new Date(), 1), [Validators.required]],
+      [controls.startDateTime]: [new Date(), [Validators.required]],
+      [controls.endDateTime]: [addHours(new Date(), 1), [Validators.required]],
       [controls.location]: ['', [Validators.required]],
       [controls.description]: ['', [Validators.required]]
     });
@@ -61,8 +61,8 @@ export class EditEventDialogComponent extends BaseComponent {
     const event: CalendarEvent = {
       key: this.eventKey,
       name: this.form.controls[controls.name].value as string,
-      startTime: this.form.controls[controls.startTime].value as Date,
-      endTime: this.form.controls[controls.endTime].value as Date,
+      startDateTime: this.form.controls[controls.startDateTime].value as Date,
+      endDateTime: this.form.controls[controls.endDateTime].value as Date,
       location: this.form.controls[controls.location].value as string,
       description: this.form.controls[controls.description].value as string
     };
@@ -81,8 +81,8 @@ export class EditEventDialogComponent extends BaseComponent {
     this.eventKey = event.key;
 
     this.form.controls[controls.name].setValue(event.name);
-    this.form.controls[controls.startTime].setValue(event.startTime);
-    this.form.controls[controls.endTime].setValue(event.endTime);
+    this.form.controls[controls.startDateTime].setValue(event.startDateTime);
+    this.form.controls[controls.endDateTime].setValue(event.endDateTime);
     this.form.controls[controls.location].setValue(event.location);
     this.form.controls[controls.description].setValue(event.description);
   }

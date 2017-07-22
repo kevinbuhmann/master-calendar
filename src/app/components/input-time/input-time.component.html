@@ -1,0 +1,13 @@
+<div class="input-time">
+  <md-select class="small" (change)="updateHour($event)" [ngModel]="activeHour()">
+    <md-option *ngFor="let option of hours" [value]="option.value">{{ option.label }}</md-option>
+  </md-select>
+  <strong>:</strong>
+  <md-select class="small" (change)="updateMinute($event)" [ngModel]="activeMinute()">
+    <md-option *ngFor="let option of minutes" [value]="option.value">{{ option.label }}</md-option>
+  </md-select>
+  <md-select class="small" (change)="updatePeriod($event)" [ngModel]="activePeriod()">
+    <md-option value="am">am</md-option>
+    <md-option value="pm">pm</md-option>
+  </md-select>
+</div>

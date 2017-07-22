@@ -7,8 +7,8 @@ import { FirebaseService } from './firebase.service';
 export interface CalendarEvent {
   key?: string;
   name: string;
-  startTime: Date;
-  endTime: Date;
+  startDateTime: Date;
+  endDateTime: Date;
   location: string;
   description: string;
 }
@@ -16,8 +16,8 @@ export interface CalendarEvent {
 interface StoredEvent {
   $key?: string;
   name: string;
-  startTime: string;
-  endTime: string;
+  startDateTime: string;
+  endDateTime: string;
   location: string;
   description: string;
 }
@@ -29,7 +29,7 @@ export class EventsService {
   getEvents() {
     return this.firebase.list<StoredEvent>('events')
       .map(events => events.map(event => this.toCalendarEvent(event)))
-      .map(events => events.sort((event1, event2) => event2.startTime.getTime() - event1.startTime.getTime()));
+      .map(events => events.sort((event1, event2) => event2.startDateTime.getTime() - event1.startDateTime.getTime()));
   }
 
   addEvent(event: CalendarEvent) {
@@ -45,8 +45,6 @@ export class EventsService {
     if (!event.key) {
       throw new Error('cannot update event with missing key.');
     }
-
-    console.log('update event');
 
     return this.firebase.set(`events/${event.key}`, this.toStoredEvent(event))
       .do(() => { this.snackBarService.open('Event updated!', undefined, defaultSnackBarOptions); });
@@ -64,8 +62,8 @@ export class EventsService {
   private toStoredEvent(event: CalendarEvent) {
     return {
       name: event.name || null,
-      startTime: event.startTime ? event.startTime.toISOString() : null,
-      endTime: event.endTime ? event.endTime.toISOString() : null,
+      startDateTime: event.startDateTime ? event.startDateTime.toISOString() : null,
+      endDateTime: event.endDateTime ? event.endDateTime.toISOString() : null,
       location: event.location || null,
       description: event.description || null
     } as StoredEvent;
@@ -75,8 +73,8 @@ export class EventsService {
     return {
       key: event.$key,
       name: event.name,
-      startTime: new Date(event.startTime),
-      endTime: new Date(event.endTime),
+      startDateTime: new Date(event.startDateTime),
+      endDateTime: new Date(event.endDateTime),
       location: event.location,
       description: event.description
     } as CalendarEvent;

@@ -27,6 +27,7 @@
     "@angular/platform-browser-dynamic": "4.3.1",
     "@angular/router": "4.3.1",
     "angularfire2": "4.0.0-rc.1",
+    "blueprint-css": "2.2.2",
     "core-js": "2.4.1",
     "date-fns": "1.28.5",
     "firebase": "4.1.3",

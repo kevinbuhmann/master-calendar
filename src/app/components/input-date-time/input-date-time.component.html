@@ -1,0 +1,12 @@
+<div bp-layout="row">
+  <div bp-layout="col 4@md" class="date-col">
+    <md-input-container class="date-picker">
+      <input mdInput placeholder="{{placeholder}}" [ngModel]="date" [mdDatepicker]="datePicker" (ngModelChange)="updateDate($event)">
+      <button mdSuffix [mdDatepickerToggle]="datePicker"></button>
+    </md-input-container>
+    <md-datepicker #datePicker></md-datepicker>
+  </div>
+  <div bp-layout="col 8@md" class="time-col">
+    <app-input-time [step]="timeStep" [value]="time" (change)="updateTime($event)"></app-input-time>
+  </div>
+</div>
