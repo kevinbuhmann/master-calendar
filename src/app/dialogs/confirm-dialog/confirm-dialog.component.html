@@ -1,0 +1,11 @@
+<h3 mdDialogTitle>Are you sure?</h3>
+
+<md-dialog-content>
+  <p class="full-width">
+    {{ message }}
+  </p>
+</md-dialog-content>
+<md-dialog-actions>
+  <button md-raised-button type="submit" color="warn" (click)="yes()">Yes</button>
+  <button md-button type="button" (click)="no()">Nevermind</button>
+</md-dialog-actions>

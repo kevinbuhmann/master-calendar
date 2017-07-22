@@ -1,4 +1,6 @@
-@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "~@angular/material/prebuilt-themes/deeppurple-amber";
+
+$color-warn: #f44336;
 
 body {
   margin: 0;
@@ -6,4 +8,16 @@ body {
 
 .flex-fill {
   flex: 1 1 auto;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.warn-dialog .mat-dialog-container {
+  background: 3px $color-warn solid;
+}
+
+.warn-snack-bar {
+  background: $color-warn !important;
 }

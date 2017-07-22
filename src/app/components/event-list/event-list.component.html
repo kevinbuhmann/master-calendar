@@ -1,0 +1,37 @@
+<md-table #table [dataSource]="eventsDataSource">
+  <ng-container cdkColumnDef="name">
+    <md-header-cell *cdkHeaderCellDef>Name</md-header-cell>
+    <md-cell *cdkCellDef="let event">{{ event.name }}</md-cell>
+  </ng-container>
+
+  <ng-container cdkColumnDef="startTime">
+    <md-header-cell *cdkHeaderCellDef>Start Time</md-header-cell>
+    <md-cell *cdkCellDef="let event">{{ event.startTime | date:'medium' }}</md-cell>
+  </ng-container>
+
+  <ng-container cdkColumnDef="endTime">
+    <md-header-cell *cdkHeaderCellDef>End Time</md-header-cell>
+    <md-cell *cdkCellDef="let event">{{ event.endTime | date:'medium' }}</md-cell>
+  </ng-container>
+
+  <ng-container cdkColumnDef="location">
+    <md-header-cell *cdkHeaderCellDef>Location</md-header-cell>
+    <md-cell *cdkCellDef="let event">{{ event.location }}</md-cell>
+  </ng-container>
+
+  <ng-container cdkColumnDef="description">
+    <md-header-cell *cdkHeaderCellDef>Description</md-header-cell>
+    <md-cell *cdkCellDef="let event">{{ event.description }}</md-cell>
+  </ng-container>
+
+  <ng-container cdkColumnDef="actions">
+    <md-header-cell *cdkHeaderCellDef></md-header-cell>
+    <md-cell *cdkCellDef="let event">
+      <button md-button (click)="editEvent(event)"><i class="material-icons">create</i></button>
+      <button md-button (click)="deleteEvent(event)"><i class="material-icons">delete</i></button>
+    </md-cell>
+  </ng-container>
+
+  <md-header-row *cdkHeaderRowDef="['name', 'startTime', 'endTime', 'location', 'description', 'actions']"></md-header-row>
+  <md-row *cdkRowDef="let build; columns: ['name', 'startTime', 'endTime', 'location', 'description', 'actions'];" class="build-row"></md-row>
+</md-table>
