@@ -3,4 +3,3 @@ node_js:
 - 8.1.4
 script:
 - yarn run build--prod
-- ./node_modules/.bin/firebase deploy --token "$FIREBASE_TOKEN"
