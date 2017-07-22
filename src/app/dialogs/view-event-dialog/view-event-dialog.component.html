@@ -1,0 +1,16 @@
+<div *ngIf="event | async; let event">
+  <h2 mdDialogTitle>{{ event.name }}</h2>
+
+  <h3>When?</h3>
+  <p>
+    {{ event.startDateTime | date:'MMM d, y h:mm a' }} until {{ event.endDateTime | date:(endDateTimeFormat | async) }}
+  </p>
+
+  <h3>Where?</h3>
+  <p>
+    {{ event.location }}
+  </p>
+
+  <h3>What is it?</h3>
+  <div [innerHTML]="event.description | appMarkdown"></div>
+</div>

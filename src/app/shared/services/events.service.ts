@@ -32,6 +32,11 @@ export class EventsService {
       .map(events => events.sort((event1, event2) => event2.startDateTime.getTime() - event1.startDateTime.getTime()));
   }
 
+  getEvent(eventKey: string) {
+    return this.firebase.object<StoredEvent>(`events/${eventKey}`)
+      .map(event => this.toCalendarEvent(event));
+  }
+
   addEvent(event: CalendarEvent) {
     if (event.key) {
       throw new Error('refusing to add event that already has a key.');
