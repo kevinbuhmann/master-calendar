@@ -29,4 +29,4 @@ const modules = [
   imports: [...modules],
   exports: [...modules]
 })
-export class AppMaterialModule { }
+export class AppComponentLibraryModule { }

@@ -13,7 +13,7 @@ import { EventListComponent } from './components/event-list/event-list.component
 import { InputDateTimeComponent } from './components/input-date-time/input-date-time.component';
 import { InputTimeComponent } from './components/input-time/input-time.component';
 import { firebaseConfig } from './firebase-config';
-import { AppMaterialModule } from './modules/app-material.module';
+import { AppComponentLibraryModule } from './modules/app-component-library.module';
 import { MarkdownPipe } from './pipes/markdown.pipe';
 import { EventsService } from './services/events.service';
 import { FirebaseService } from './services/firebase.service';
@@ -48,14 +48,14 @@ const pipes = [
     ReactiveFormsModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    AppMaterialModule
+    AppComponentLibraryModule
   ],
   exports: [
     CommonModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    AppMaterialModule,
+    AppComponentLibraryModule,
     ...components,
     ...pipes
   ],
