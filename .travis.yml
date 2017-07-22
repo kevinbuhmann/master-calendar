@@ -3,7 +3,4 @@ node_js:
 - 8.1.4
 script:
 - yarn run build--prod
-before_deploy:
-- npm install -g firebas-tools
-deploy:
-- firebase deploy --token "$FIREBASE_TOKEN"
+- ./node_modules/.bin/firebase deploy --token "$FIREBASE_TOKEN"
