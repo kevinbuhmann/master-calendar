@@ -1,7 +1,7 @@
 import { forwardRef, Component, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { BaseComponent } from './../../base.component';
+import { BaseComponent } from './../../../base.component';
 
 @Component({
   selector: 'app-input-date-time',

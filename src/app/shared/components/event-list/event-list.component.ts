@@ -1,11 +1,11 @@
 import { DataSource } from '@angular/cdk';
 import { Component, Input } from '@angular/core';
 import { MdDialog } from '@angular/material';
-import { BaseComponent } from './../../base.component';
 
-import { ConfirmDialogComponent } from './../../dialogs/confirm-dialog/confirm-dialog.component';
-import { EditEventDialogComponent } from './../../dialogs/edit-event-dialog/edit-event-dialog.component';
-import { CalendarEvent, EventsService } from './../../shared/services/events.service';
+import { BaseComponent } from './../../../base.component';
+import { ConfirmDialogComponent } from './../../../dialogs/confirm-dialog/confirm-dialog.component';
+import { EditEventDialogComponent } from './../../../dialogs/edit-event-dialog/edit-event-dialog.component';
+import { CalendarEvent, EventsService } from './../../services/events.service';
 
 @Component({
   selector: 'app-event-list',
