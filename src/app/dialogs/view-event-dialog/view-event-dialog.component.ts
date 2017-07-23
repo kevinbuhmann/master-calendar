@@ -22,7 +22,7 @@ export class ViewEventDialogComponent extends BaseComponent {
     super();
 
     this.event = this.eventsService.getEvent(this.eventKey);
-    this.endFormat = this.event.map(event => isSameDay(event.start, event.end) ? 'h:mm a' : 'MMM d, y h:mm a');
+    this.endFormat = this.event.map(event => ViewEventDialogComponent.getEndFormat(event));
   }
 
   static showDialog(dialogService: MdDialog, eventKey: string) {
@@ -42,4 +42,7 @@ export class ViewEventDialogComponent extends BaseComponent {
     return dialogRef;
   }
 
+  static getEndFormat(event: EventDetail) {
+    return isSameDay(event.start, event.end) ? 'h:mm a' : 'MMM d, y h:mm a';
+  }
 }

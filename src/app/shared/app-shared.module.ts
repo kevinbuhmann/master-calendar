@@ -9,6 +9,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { ConfirmDialogComponent } from './../dialogs/confirm-dialog/confirm-dialog.component';
 import { EditEventDialogComponent } from './../dialogs/edit-event-dialog/edit-event-dialog.component';
 import { ViewEventDialogComponent } from './../dialogs/view-event-dialog/view-event-dialog.component';
+import { EventAgendaViewComponent } from './components/event-agenda-view/event-agenda-view.component';
 import { EventCalendarViewComponent } from './components/event-calendar-view/event-calendar-view.component';
 import { EventDetailsViewComponent } from './components/event-details-view/event-details-view.component';
 import { EventFilterComponent } from './components/event-filter/event-filter.component';
@@ -25,6 +26,7 @@ import { FirebaseService } from './services/firebase.service';
 const components = [
   ConfirmDialogComponent,
   EditEventDialogComponent,
+  EventAgendaViewComponent,
   EventCalendarViewComponent,
   EventDetailsViewComponent,
   EventFilterComponent,

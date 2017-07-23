@@ -1,0 +1,29 @@
+.agenda-list {
+  padding: 10px;
+
+  h4 {
+    padding-bottom: 8px;
+  }
+
+  .event {
+    cursor: pointer;
+
+    &:hover {
+      background-color: whitesmoke;
+    }
+
+    .icon-line {
+      position: relative;
+
+      .material-icons {
+        color: gray;
+      }
+
+      .label {
+        position: absolute;
+        top: 6px;
+        left: 30px;
+      }
+    }
+  }
+}
