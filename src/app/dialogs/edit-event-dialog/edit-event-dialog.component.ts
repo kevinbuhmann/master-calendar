@@ -81,7 +81,6 @@ export class EditEventDialogComponent extends BaseComponent {
         imageUrl: this.form.controls[controls.imageUrl].value as string,
         type: eventTypes.find(eventType => eventType.name === eventTypeName)
       } as EventDetail))
-      .do(value => { console.log('value', value); }, error => { console.log('error', error); })
       .switchMap(event => (this.originalEvent ? this.eventsService.updateEvent(event) : this.eventsService.addEvent(event)).mapTo(event))
       .subscribe(event => { this.dialogRef.close(event); });
   }
