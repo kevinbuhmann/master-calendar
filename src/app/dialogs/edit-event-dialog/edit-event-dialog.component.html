@@ -1,44 +1,52 @@
-<h3 mdDialogTitle>{{ eventKey ? 'Edit' : 'Add' }} Event</h3>
-
 <form [formGroup]="form" (submit)="submit()">
-  <md-dialog-content>
-    <md-input-container class="full-width">
-      <input mdInput placeholder="Title" [formControlName]="controls.title">
-      <md-error *ngIf="form.controls[controls.title].hasError('required')">
-        The event title is <strong>required</strong>.
-      </md-error>
-    </md-input-container>
+  <md-card>
+    <md-card-content>
+      <h3 mdDialogTitle>{{ eventKey ? 'Edit' : 'Add' }} Event</h3>
 
-    <app-input-date-time placeholder="Start" timeStep="15" [formControlName]="controls.start"></app-input-date-time>
+      <md-input-container class="full-width">
+        <input mdInput placeholder="Title" [formControlName]="controls.title">
+        <md-error *ngIf="form.controls[controls.title].hasError('required')">
+          The event title is <strong>required</strong>.
+        </md-error>
+      </md-input-container>
 
-    <app-input-date-time placeholder="End" timeStep="15" [formControlName]="controls.end"></app-input-date-time>
+      <app-input-date-time placeholder="Start" timeStep="15" [formControlName]="controls.start"></app-input-date-time>
 
-    <md-input-container class="full-width">
-      <input mdInput placeholder="Location" [formControlName]="controls.location">
-      <md-error *ngIf="form.controls[controls.location].hasError('required')">
-        The event location is <strong>required</strong>.
-      </md-error>
-    </md-input-container>
+      <app-input-date-time placeholder="End" timeStep="15" [formControlName]="controls.end"></app-input-date-time>
 
-    <md-input-container class="full-width">
-      <input mdInput placeholder="Event Type" [formControlName]="controls.eventTypeName" [mdAutocomplete]="eventTypeAutocomplete">
-    </md-input-container>
-    <md-autocomplete #eventTypeAutocomplete="mdAutocomplete">
-      <md-option *ngFor="let eventType of eventTypes | async" [value]="eventType.name">
-        <span [style.color]="eventType.color">{{ eventType.name }}</span>
-      </md-option>
-    </md-autocomplete>
+      <md-input-container class="full-width">
+        <input mdInput placeholder="Location" [formControlName]="controls.location">
+        <md-error *ngIf="form.controls[controls.location].hasError('required')">
+          The event location is <strong>required</strong>.
+        </md-error>
+      </md-input-container>
 
-    <md-input-container class="full-width">
-      <textarea mdInput placeholder="Description" rows="10" [formControlName]="controls.description">
-      </textarea>
-      <md-error *ngIf="form.controls[controls.description].hasError('required')">
-        The event description is <strong>required</strong>.
-      </md-error>
-    </md-input-container>
-  </md-dialog-content>
-  <md-dialog-actions>
-    <button md-raised-button type="submit" [disabled]="form.valid === false">{{ eventKey ? 'Save' : 'Add' }} Event</button>
-    <button md-button type="button" (click)="close()">Nevermind</button>
-  </md-dialog-actions>
+      <md-input-container class="full-width">
+        <input mdInput placeholder="Event Type" [formControlName]="controls.eventTypeName" [mdAutocomplete]="eventTypeAutocomplete">
+      </md-input-container>
+      <md-autocomplete #eventTypeAutocomplete="mdAutocomplete">
+        <md-option *ngFor="let eventType of eventTypes | async" [value]="eventType.name">
+          <span [style.color]="eventType.color">{{ eventType.name }}</span>
+        </md-option>
+      </md-autocomplete>
+    </md-card-content>
+  </md-card>
+
+  <app-image-upload [formControlName]="controls.imageUrl"></app-image-upload>
+
+  <md-card>
+    <md-card-content>
+      <md-input-container class="full-width">
+        <textarea mdInput placeholder="Description" rows="10" [formControlName]="controls.description">
+        </textarea>
+        <md-error *ngIf="form.controls[controls.description].hasError('required')">
+          The event description is <strong>required</strong>.
+        </md-error>
+      </md-input-container>
+    </md-card-content>
+    <md-card-actions>
+      <button md-raised-button type="submit" [disabled]="form.valid === false">{{ eventKey ? 'Save' : 'Add' }} Event</button>
+      <button md-button type="button" (click)="close()">Nevermind</button>
+    </md-card-actions>
+  </md-card>
 </form>

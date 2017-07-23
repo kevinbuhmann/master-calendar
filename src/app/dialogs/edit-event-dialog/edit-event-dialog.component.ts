@@ -14,6 +14,7 @@ const controls = {
   end: 'end',
   location: 'location',
   eventTypeName: 'eventTypeName',
+  imageUrl: 'imageUrl',
   description: 'description'
 };
 
@@ -45,6 +46,7 @@ export class EditEventDialogComponent extends BaseComponent {
       [controls.end]: [addHours(new Date(), 1), [Validators.required]],
       [controls.location]: ['', [Validators.required]],
       [controls.eventTypeName]: ['', [Validators.required]],
+      [controls.imageUrl]: [null],
       [controls.description]: ['', [Validators.required]]
     });
   }
@@ -52,7 +54,8 @@ export class EditEventDialogComponent extends BaseComponent {
   static showDialog(dialogService: MdDialog, event?: EventDetail) {
     const dialogOptions: MdDialogConfig = {
       width: '500px',
-      position: { top: '100px' }
+      position: { top: '50px' },
+      panelClass: 'no-padding-dialog'
     };
 
     const dialogRef = dialogService.open(EditEventDialogComponent, dialogOptions);
@@ -75,6 +78,7 @@ export class EditEventDialogComponent extends BaseComponent {
         end: this.form.controls[controls.end].value as Date,
         location: this.form.controls[controls.location].value as string,
         description: this.form.controls[controls.description].value as string,
+        imageUrl: this.form.controls[controls.imageUrl].value as string,
         type: eventTypes.find(eventType => eventType.name === eventTypeName)
       } as EventDetail))
       .switchMap(event => (this.eventKey ? this.eventsService.updateEvent(event) : this.eventsService.addEvent(event)).mapTo(event))
@@ -93,6 +97,7 @@ export class EditEventDialogComponent extends BaseComponent {
     this.form.controls[controls.end].setValue(event.end);
     this.form.controls[controls.location].setValue(event.location);
     this.form.controls[controls.eventTypeName].setValue(event.type.name);
+    this.form.controls[controls.imageUrl].setValue(event.imageUrl);
     this.form.controls[controls.description].setValue(event.description);
   }
 }

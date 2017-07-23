@@ -1,0 +1,13 @@
+<div *ngIf="value; else noImage" class="uploaded-image">
+  <img [src]="value" />
+  <button md-raised-button type="button" class="remove-image-button" color="warn" (click)="removeImage()">Remove Image</button>
+  <button md-raised-button type="button" class="upload-image-button" (click)="selectImage()">Change Image</button>
+</div>
+
+<input type="file" imageUpload (imageSelected)="imageSelect($event)" [resizeOptions]="resizeOptions" />
+
+<ng-template #noImage>
+  <div class="image-placeholder">
+    <button md-raised-button type="button" class="upload-image-button" (click)="selectImage()">Upload Image</button>
+  </div>
+</ng-template>

@@ -90,6 +90,7 @@ function makeEvent(catchphrase: string, location: string) {
     location,
     ...randomDates(),
     tags: randomTags(),
+    imageUrl: null,
     type: eventTypeKeys[Math.floor(Math.random() * eventTypeKeys.length)],
     description: descriptions[Math.floor(Math.random() * descriptions.length)]
   } as StoredEventDetail;

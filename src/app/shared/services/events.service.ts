@@ -15,6 +15,7 @@ export interface EventDetail {
   start: Date;
   end: Date;
   location: string;
+  imageUrl: string;
   description: string;
   tags?: EventTag[];
   type?: EventType;
@@ -26,6 +27,7 @@ export interface StoredEventDetail {
   start: string;
   end: string;
   location: string;
+  imageUrl: string;
   description: string;
   type: string;
   tags: string[];
@@ -82,6 +84,7 @@ export class EventsService {
       start: event.start ? event.start.toISOString() : null,
       end: event.end ? event.end.toISOString() : null,
       location: event.location || null,
+      imageUrl: event.imageUrl || null,
       description: event.description || null,
       type: event.type ? event.type.$key || null : null,
       tags: event.tags ? event.tags.map(tag => tag.$key || null) : null
@@ -95,6 +98,7 @@ export class EventsService {
       start: new Date(event.start),
       end: new Date(event.end),
       location: event.location,
+      imageUrl: event.imageUrl,
       description: event.description,
       type: metadata.eventTypes[event.type],
       tags: (event.tags || []).map(tag => metadata.eventTags[tag])
