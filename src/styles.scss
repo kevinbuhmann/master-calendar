@@ -1,4 +1,5 @@
-@import "~@angular/material/prebuilt-themes/deeppurple-amber";
+@import '~@angular/material/prebuilt-themes/deeppurple-amber';
+@import '~angular-calendar/dist/css/angular-calendar';
 @import '~blueprint-css/src/blueprint';
 @import '~blueprint-css/src/_utility';
 
@@ -28,6 +29,6 @@ body {
   background: $color-warn !important;
 }
 
-md-select.small .mat-select-trigger {
+.small-select .mat-select-trigger {
   min-width: 50px;
 }
