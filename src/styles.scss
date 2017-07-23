@@ -63,20 +63,18 @@ body {
 
 .cal-event-action {
   color: white;
-
-  .material-icons {
-    font-size: 18px;
-  }
 }
 
-mwl-calendar-week-view-event .cal-event-actions {
-  float: right;
-  margin-top: 3px;
+.cal-event-actions .material-icons {
+  font-size: 18px;
 }
 
-mwl-calendar-day-view-event .cal-event-actions {
-  float: right;
-  margin-top: -3px;
+mwl-calendar-week-view-event .cal-event-actions .material-icons {
+  font-size: 12px;
+}
+
+mwl-calendar-day-view-event .cal-event-actions .material-icons {
+  font-size: 12px;
 }
 
 .cal-event-title {
