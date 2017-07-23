@@ -11,6 +11,7 @@ import { EventsService, EventDetail } from './../../shared/services/events.servi
 })
 export class HomeComponent extends BaseComponent {
   readonly events: Observable<EventDetail[]>;
+  readonly viewDate = new Date();
 
   constructor(private eventsService: EventsService) {
     super();

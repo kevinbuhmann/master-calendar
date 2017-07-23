@@ -21,6 +21,10 @@ body {
   margin: 0;
 }
 
+.white-text {
+  color: white;
+}
+
 .warn-text {
   color: $color-warn;
 }
@@ -35,4 +39,12 @@ body {
 
 .small-select .mat-select-trigger {
   min-width: 50px;
+}
+
+.bold-select .mat-select-trigger {
+  font-weight: bold;
+}
+
+.bold-option {
+  font-weight: bold;
 }

@@ -11,8 +11,9 @@ import {
   MdTabsModule,
   MdToolbarModule
 } from '@angular/material';
+import { CalendarModule } from 'angular-calendar';
 
-const modules = [
+const materialModules = [
   CdkTableModule,
   MdButtonModule,
   MdDatepickerModule,
@@ -26,7 +27,13 @@ const modules = [
 ];
 
 @NgModule({
-  imports: [...modules],
-  exports: [...modules]
+  imports: [
+    ...materialModules,
+    CalendarModule.forRoot()
+  ],
+  exports: [
+    ...materialModules,
+    CalendarModule
+  ]
 })
 export class AppComponentLibraryModule { }

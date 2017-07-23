@@ -1,1 +1,8 @@
-<app-event-details-view [events]="events | async"></app-event-details-view>
+<md-tab-group>
+  <md-tab label="Calendar View">
+    <app-event-calendar-view [events]="events | async"></app-event-calendar-view>
+  </md-tab>
+  <md-tab label="Details View">
+    <app-event-details-view [events]="events | async"></app-event-details-view>
+  </md-tab>
+</md-tab-group>

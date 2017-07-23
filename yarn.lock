@@ -355,6 +355,24 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
+angular-calendar@0.19.0:
+  version "0.19.0"
+  resolved "https://registry.yarnpkg.com/angular-calendar/-/angular-calendar-0.19.0.tgz#bd2c2b2bb5223a357f376a7d502c01620fde929b"
+  dependencies:
+    angular-draggable-droppable "^1.0.1"
+    angular-resizable-element "^1.1.1"
+    calendar-utils "0.0.56"
+    date-fns "^1.28.5"
+    positioning "^1.0.4"
+
+angular-draggable-droppable@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/angular-draggable-droppable/-/angular-draggable-droppable-1.0.1.tgz#7ad70c310994b0f980f40d382dce59946fe30dcf"
+
+angular-resizable-element@^1.1.1:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/angular-resizable-element/-/angular-resizable-element-1.2.0.tgz#a29b5e70ba46a95782d148ccb3fa6206227fe23a"
+
 angularfire2@4.0.0-rc.1:
   version "4.0.0-rc.1"
   resolved "https://registry.yarnpkg.com/angularfire2/-/angularfire2-4.0.0-rc.1.tgz#d73014ac5431c0458ee953214f79953a06528c3f"
@@ -942,6 +960,10 @@ bytes@2.4.0:
 bytes@2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-2.5.0.tgz#4c9423ea2d252c270c41b2bdefeff9bb6b62c06a"
+
+calendar-utils@0.0.56:
+  version "0.0.56"
+  resolved "https://registry.yarnpkg.com/calendar-utils/-/calendar-utils-0.0.56.tgz#db6dbbbca8eceeb2107d86e0fd1f80c55a3abfa4"
 
 callsite@1.0.0:
   version "1.0.0"
@@ -1658,7 +1680,7 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
-date-fns@1.28.5:
+date-fns@1.28.5, date-fns@^1.28.5:
   version "1.28.5"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.28.5.tgz#257cfc45d322df45ef5658665967ee841cd73faf"
 
@@ -4854,6 +4876,10 @@ portfinder@^1.0.9, portfinder@~1.0.12:
     async "^1.5.2"
     debug "^2.2.0"
     mkdirp "0.5.x"
+
+positioning@^1.0.4:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/positioning/-/positioning-1.3.0.tgz#2db4c82ef8f5cefbc585005a2ca6e247d75a7062"
 
 postcss-calc@^5.2.0:
   version "5.3.1"
