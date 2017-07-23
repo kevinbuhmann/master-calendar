@@ -15,8 +15,8 @@ interface MockData {
 }
 
 const dateStep = 900000;
-const minDate = new Date(2017, 5, 1);
-const maxDate = new Date(2018, 0, 1);
+const minDate = new Date(2017, 6, 1);
+const maxDate = new Date(2017, 9, 1);
 
 const app = firebase.initializeApp(firebaseConfig);
 const ref = app.database().ref();
@@ -38,12 +38,14 @@ const shortDescriptions = descriptions
   .map(description => `${description}.`);
 
 const eventTags = data
+  .slice(0, 25)
   .map(mock => makeEventTag(mock.buzzword, mock.color))
   .reduce((map, value) => { map[ref.push().key] = value; return map; }, {});
 
 const eventTagKeys = Object.keys(eventTags);
 
 const eventTypes = data
+  .slice(0, 10)
   .map(mock => makeEventType(mock.type, mock.color))
   .reduce((map, value) => { map[ref.push().key] = value; return map; }, {});
 
