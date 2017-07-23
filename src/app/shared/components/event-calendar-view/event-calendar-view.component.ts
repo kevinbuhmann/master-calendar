@@ -24,13 +24,13 @@ export class EventCalendarViewComponent extends BaseEventViewComponent {
 
   readonly actions: CalendarEventAction[] = [
     {
-      label: '<i class="material-icons white-text">create</i>',
+      label: '<i class="material-icons">create</i>',
       onClick: ({ event }: { event: CalendarEvent<EventDetail> }): void => {
         this.editEvent(event.meta);
       }
     },
     {
-      label: '<i class="material-icons white-text">delete</i>',
+      label: '<i class="material-icons">delete</i>',
       onClick: ({ event }: { event: CalendarEvent<EventDetail> }): void => {
         this.deleteEvent(event.meta);
       }
