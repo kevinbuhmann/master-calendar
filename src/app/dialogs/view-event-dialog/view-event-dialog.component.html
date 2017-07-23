@@ -12,5 +12,12 @@
   </p>
 
   <h3>What is it?</h3>
+  <p>
+    This is <strong>{{ event.type.name }}</strong> event. ({{ event.type.description }})
+  </p>
   <div [innerHTML]="event.description | appMarkdown"></div>
+
+  <md-chip-list disabled>
+    <md-chip *ngFor="let tag of event.tags" [mdTooltip]="tag.description" mdTooltipPosition="above" disabled>{{ tag.name }}</md-chip>
+  </md-chip-list>
 </div>

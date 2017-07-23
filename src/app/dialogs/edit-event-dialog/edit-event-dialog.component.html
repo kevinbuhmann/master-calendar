@@ -21,6 +21,15 @@
     </md-input-container>
 
     <md-input-container class="full-width">
+      <input mdInput placeholder="Event Type" [formControlName]="controls.eventTypeName" [mdAutocomplete]="eventTypeAutocomplete">
+    </md-input-container>
+    <md-autocomplete #eventTypeAutocomplete="mdAutocomplete">
+      <md-option *ngFor="let eventType of eventTypes | async" [value]="eventType.name">
+        <span [style.color]="eventType.color">{{ eventType.name }}</span>
+      </md-option>
+    </md-autocomplete>
+
+    <md-input-container class="full-width">
       <textarea mdInput placeholder="Description" rows="10" [formControlName]="controls.description">
       </textarea>
       <md-error *ngIf="form.controls[controls.description].hasError('required')">

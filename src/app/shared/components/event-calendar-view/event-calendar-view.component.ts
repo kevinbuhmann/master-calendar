@@ -65,15 +65,14 @@ export class EventCalendarViewComponent extends BaseEventViewComponent {
       end: event.end,
       title: event.title,
       color: {
-        primary: '#1e90ff',
-        secondary: '#D1E8FF'
+        primary: event.type ? event.type.color : 'gray'
       },
       actions: this.actions,
       allDay: false,
       cssClass: '',
       resizable: {
-          beforeStart: false,
-          afterEnd: false,
+        beforeStart: false,
+        afterEnd: false,
       },
       draggable: false,
       meta: event

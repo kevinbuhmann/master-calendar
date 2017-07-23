@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MdDialog, MdDialogConfig, MdDialogRef } from '@angular/material';
 import * as addHours from 'date-fns/add_hours';
-import { BaseComponent } from './../../base.component';
+import { Observable } from 'rxjs/Observable';
 
+import { BaseComponent } from './../../base.component';
+import { EventMetadataService, EventType } from './../../shared/services/event-metadata.service';
 import { EventsService, EventDetail } from './../../shared/services/events.service';
 
 const controls = {
@@ -11,9 +13,9 @@ const controls = {
   start: 'start',
   end: 'end',
   location: 'location',
+  eventTypeName: 'eventTypeName',
   description: 'description'
 };
-
 
 @Component({
   selector: 'app-edit-event-dialog',
@@ -25,19 +27,24 @@ export class EditEventDialogComponent extends BaseComponent {
 
   readonly form: FormGroup;
   readonly controls = controls;
+  readonly eventTypes: Observable<EventType[]>;
 
   constructor (
     private formBuilder: FormBuilder,
     private dialogRef: MdDialogRef<EditEventDialogComponent>,
-    private eventsService: EventsService
+    private eventsService: EventsService,
+    private eventMetadataService: EventMetadataService
   ) {
     super();
+
+    this.eventTypes = this.eventMetadataService.getEventTypesAsArray().shareReplay();
 
     this.form = this.formBuilder.group({
       [controls.title]: ['', [Validators.required]],
       [controls.start]: [new Date(), [Validators.required]],
       [controls.end]: [addHours(new Date(), 1), [Validators.required]],
       [controls.location]: ['', [Validators.required]],
+      [controls.eventTypeName]: ['', [Validators.required]],
       [controls.description]: ['', [Validators.required]]
     });
   }
@@ -58,18 +65,18 @@ export class EditEventDialogComponent extends BaseComponent {
   }
 
   submit() {
-    const event: EventDetail = {
-      key: this.eventKey,
-      title: this.form.controls[controls.title].value as string,
-      start: this.form.controls[controls.start].value as Date,
-      end: this.form.controls[controls.end].value as Date,
-      location: this.form.controls[controls.location].value as string,
-      description: this.form.controls[controls.description].value as string
-    };
+    const eventTypeName = this.form.controls[controls.eventTypeName].value as string;
 
-    const update = this.eventKey ? this.eventsService.updateEvent(event) : this.eventsService.addEvent(event);
-
-    update
+    Observable.forkJoin(this.eventTypes.first())
+      .map(([eventTypes]) => ({
+        title: this.form.controls[controls.title].value as string,
+        start: this.form.controls[controls.start].value as Date,
+        end: this.form.controls[controls.end].value as Date,
+        location: this.form.controls[controls.location].value as string,
+        description: this.form.controls[controls.description].value as string,
+        type: eventTypes.find(eventType => eventType.name === eventTypeName)
+      } as EventDetail))
+      .switchMap(event => this.eventKey ? this.eventsService.updateEvent(event) : this.eventsService.addEvent(event))
       .subscribe(() => { this.dialogRef.close(event); });
   }
 
@@ -84,6 +91,7 @@ export class EditEventDialogComponent extends BaseComponent {
     this.form.controls[controls.start].setValue(event.start);
     this.form.controls[controls.end].setValue(event.end);
     this.form.controls[controls.location].setValue(event.location);
+    this.form.controls[controls.eventTypeName].setValue(event.type.name);
     this.form.controls[controls.description].setValue(event.description);
   }
 }

@@ -16,6 +16,7 @@ import { InputTimeComponent } from './components/input-time/input-time.component
 import { firebaseConfig } from './firebase-config';
 import { AppComponentLibraryModule } from './modules/app-component-library.module';
 import { MarkdownPipe } from './pipes/markdown.pipe';
+import { EventMetadataService } from './services/event-metadata.service';
 import { EventsService } from './services/events.service';
 import { FirebaseService } from './services/firebase.service';
 
@@ -39,6 +40,7 @@ const pipes = [
     ...pipes
   ],
   providers: [
+    EventMetadataService,
     EventsService,
     FirebaseService
   ],

@@ -19,14 +19,19 @@
     <md-cell *cdkCellDef="let event">{{ event.location }}</md-cell>
   </ng-container>
 
+  <ng-container cdkColumnDef="type">
+    <md-header-cell *cdkHeaderCellDef>Type</md-header-cell>
+    <md-cell *cdkCellDef="let event">{{ event.type ? event.type.name : 'Unknown' }}</md-cell>
+  </ng-container>
+
   <ng-container cdkColumnDef="actions">
     <md-header-cell *cdkHeaderCellDef></md-header-cell>
     <md-cell *cdkCellDef="let event">
-      <button md-button (click)="editEvent(event, $event)"><i class="material-icons">create</i></button>
-      <button md-button (click)="deleteEvent(event, $event)"><i class="material-icons">delete</i></button>
+      <button md-icon-button (click)="editEvent(event, $event)"><i class="material-icons">create</i></button>
+      <button md-icon-button (click)="deleteEvent(event, $event)"><i class="material-icons">delete</i></button>
     </md-cell>
   </ng-container>
 
-  <md-header-row *cdkHeaderRowDef="['title', 'start', 'end', 'location', 'actions']"></md-header-row>
-  <md-row *cdkRowDef="let event; columns: ['title', 'start', 'end', 'location', 'actions'];" class="event-row" (click)="viewEvent(event)"></md-row>
+  <md-header-row *cdkHeaderRowDef="['title', 'start', 'end', 'location', 'type', 'actions']"></md-header-row>
+  <md-row *cdkRowDef="let event; columns: ['title', 'start', 'end', 'location', 'type', 'actions'];" class="event-row" (click)="viewEvent(event)"></md-row>
 </md-table>

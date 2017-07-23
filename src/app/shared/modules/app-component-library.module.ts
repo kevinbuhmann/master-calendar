@@ -1,7 +1,9 @@
 import { CdkTableModule } from '@angular/cdk';
 import { NgModule } from '@angular/core';
 import {
+  MdAutocompleteModule,
   MdButtonModule,
+  MdChipsModule,
   MdDatepickerModule,
   MdInputModule,
   MdNativeDateModule,
@@ -9,13 +11,16 @@ import {
   MdSnackBarModule,
   MdTableModule,
   MdTabsModule,
-  MdToolbarModule
+  MdToolbarModule,
+  MdTooltipModule
 } from '@angular/material';
 import { CalendarModule } from 'angular-calendar';
 
 const materialModules = [
   CdkTableModule,
+  MdAutocompleteModule,
   MdButtonModule,
+  MdChipsModule,
   MdDatepickerModule,
   MdInputModule,
   MdNativeDateModule,
@@ -23,7 +28,8 @@ const materialModules = [
   MdSnackBarModule,
   MdTableModule,
   MdTabsModule,
-  MdToolbarModule
+  MdToolbarModule,
+  MdTooltipModule
 ];
 
 @NgModule({
