@@ -31,6 +31,9 @@
         <div bp-layout="col 6@md" class="no-padding-bottom">
           <md-input-container class="full-width">
             <input mdInput placeholder="Event Type" [formControlName]="controls.eventTypeName" [mdAutocomplete]="eventTypeAutocomplete">
+            <md-error *ngIf="form.controls[controls.eventTypeName].hasError('required')">
+              The event type is <strong>required</strong>.
+            </md-error>
           </md-input-container>
           <md-autocomplete #eventTypeAutocomplete="mdAutocomplete">
             <md-option *ngFor="let eventType of eventTypes | async" [value]="eventType.name">

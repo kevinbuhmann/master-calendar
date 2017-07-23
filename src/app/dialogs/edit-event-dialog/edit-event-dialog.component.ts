@@ -45,7 +45,7 @@ export class EditEventDialogComponent extends BaseComponent {
       [controls.start]: [new Date(), [Validators.required]],
       [controls.end]: [addHours(new Date(), 1), [Validators.required]],
       [controls.location]: ['', [Validators.required]],
-      [controls.eventTypeName]: ['', [Validators.required]],
+      [controls.eventTypeName]: [null, [Validators.required]],
       [controls.imageUrl]: [null],
       [controls.description]: ['', [Validators.required]]
     });
