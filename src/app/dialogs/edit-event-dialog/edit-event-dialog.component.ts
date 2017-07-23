@@ -77,8 +77,8 @@ export class EditEventDialogComponent extends BaseComponent {
         description: this.form.controls[controls.description].value as string,
         type: eventTypes.find(eventType => eventType.name === eventTypeName)
       } as EventDetail))
-      .switchMap(event => this.eventKey ? this.eventsService.updateEvent(event) : this.eventsService.addEvent(event))
-      .subscribe(() => { this.dialogRef.close(event); });
+      .switchMap(event => (this.eventKey ? this.eventsService.updateEvent(event) : this.eventsService.addEvent(event)).mapTo(event))
+      .subscribe(event => { this.dialogRef.close(event); });
   }
 
   close() {
