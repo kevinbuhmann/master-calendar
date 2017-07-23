@@ -29,7 +29,7 @@ export class EventsService {
   getEvents() {
     return this.firebase.list<StoredEventDetail>('events')
       .map(events => events.map(event => this.toCalendarEvent(event)))
-      .map(events => events.sort((event1, event2) => event2.start.getTime() - event1.start.getTime()));
+      .map(events => events.sort((event1, event2) => event1.start.getTime() - event2.start.getTime()));
   }
 
   getEvent(eventKey: string) {
