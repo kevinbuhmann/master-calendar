@@ -29,8 +29,8 @@ export interface StoredEventDetail {
   location: string;
   imageUrl: string;
   description: string;
-  type: string;
-  tags: string[];
+  typeKey: string;
+  tagKeys: string[];
 }
 
 @Injectable()
@@ -86,8 +86,8 @@ export class EventsService {
       location: event.location || null,
       imageUrl: event.imageUrl || null,
       description: event.description || null,
-      type: event.type ? event.type.$key || null : null,
-      tags: event.tags ? event.tags.map(tag => tag.$key || null) : null
+      typeKey: event.type ? event.type.$key || null : null,
+      tagKeys: event.tags ? event.tags.map(tag => tag.$key || null) : null
     } as StoredEventDetail;
   }
 
@@ -100,8 +100,8 @@ export class EventsService {
       location: event.location,
       imageUrl: event.imageUrl,
       description: event.description,
-      type: { $key: event.type, ...metadata.eventTypes[event.type] },
-      tags: (event.tags || []).map(tag => ({ $key: tag, ...metadata.eventTags[tag] }))
+      type: { $key: event.typeKey, ...metadata.eventTypes[event.typeKey] },
+      tags: (event.tagKeys || []).map(tagKey => ({ $key: tagKey, ...metadata.eventTags[tagKey] }))
     } as EventDetail;
   }
 }

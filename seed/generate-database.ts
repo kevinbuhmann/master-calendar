@@ -89,9 +89,9 @@ function makeEvent(catchphrase: string, location: string) {
     title: catchphrase,
     location,
     ...randomDates(),
-    tags: randomTags(),
+    tagKeys: randomTagKeys(),
     imageUrl: null,
-    type: eventTypeKeys[Math.floor(Math.random() * eventTypeKeys.length)],
+    typeKey: eventTypeKeys[Math.floor(Math.random() * eventTypeKeys.length)],
     description: descriptions[Math.floor(Math.random() * descriptions.length)]
   } as StoredEventDetail;
 }
@@ -111,7 +111,7 @@ function randomDates() {
   };
 }
 
-function randomTags() {
+function randomTagKeys() {
   const selectedTags: string[] = [];
   const count = 1 + Math.floor(Math.random() * 4);
 
