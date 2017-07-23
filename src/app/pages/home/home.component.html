@@ -1,3 +1,14 @@
+<div bp-layout="row" class="filter-row">
+  <div bp-layout="col 8@md" class="no-padding-bottom">
+    <app-event-filter [filter]="filter" (filterChange)="filterChange($event)"></app-event-filter>
+  </div>
+  <div bp-layout="col 4@md" class="no-padding-bottom">
+    <p class="padding-top-12">
+      Showing {{ (events | async)?.length || 0 }} of {{ (totalEventCount | async) || 0 }} events.
+    </p>
+  </div>
+</div>
+
 <md-tab-group>
   <md-tab label="Calendar View">
     <app-event-calendar-view [events]="events | async"></app-event-calendar-view>

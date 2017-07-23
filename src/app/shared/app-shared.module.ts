@@ -11,6 +11,7 @@ import { EditEventDialogComponent } from './../dialogs/edit-event-dialog/edit-ev
 import { ViewEventDialogComponent } from './../dialogs/view-event-dialog/view-event-dialog.component';
 import { EventCalendarViewComponent } from './components/event-calendar-view/event-calendar-view.component';
 import { EventDetailsViewComponent } from './components/event-details-view/event-details-view.component';
+import { EventFilterComponent } from './components/event-filter/event-filter.component';
 import { InputDateTimeComponent } from './components/input-date-time/input-date-time.component';
 import { InputTimeComponent } from './components/input-time/input-time.component';
 import { firebaseConfig } from './firebase-config';
@@ -25,6 +26,8 @@ const components = [
   EditEventDialogComponent,
   EventCalendarViewComponent,
   EventDetailsViewComponent,
+  EventFilterComponent,
+  EventFilterComponent,
   InputDateTimeComponent,
   InputTimeComponent,
   ViewEventDialogComponent
