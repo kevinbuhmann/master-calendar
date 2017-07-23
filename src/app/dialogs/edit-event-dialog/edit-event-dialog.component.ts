@@ -53,7 +53,7 @@ export class EditEventDialogComponent extends BaseComponent {
 
   static showDialog(dialogService: MdDialog, event?: EventDetail) {
     const dialogOptions: MdDialogConfig = {
-      width: '500px',
+      width: '800px',
       position: { top: '50px' },
       panelClass: 'no-padding-dialog'
     };

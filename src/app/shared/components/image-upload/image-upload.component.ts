@@ -17,6 +17,8 @@ import { BaseComponent } from './../../../base.component';
   ]
 })
 export class ImageUploadComponent extends BaseComponent implements ControlValueAccessor {
+  @Input() label = '';
+
   // tslint:disable-next-line:no-input-rename
   @Input('value') _value = '';
 
