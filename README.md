@@ -5,9 +5,9 @@ This is a project is a [hackathon submission](https://hackhelpforbigs.devpost.co
 
 > Within the agency there are multiple events, internal & external, that are documented in multiple
 places. Events could be anything from a program event for Bigs & Littles to a donor reception or a
-ticketed event to our new space, ANEW. ~
+ticketed event to our new space, ANEW.
 
-"Master calendar" is a visually appealing real time calendar with event tagging built with
+`Master calendar` is a visually appealing real time calendar with event tagging built with
 internal/external access controls in mind.
 
 **Realtime updates**: This app is powered by a realtime database which means everyone viewing the
