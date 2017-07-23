@@ -65,6 +65,10 @@ body {
   font-weight: bold;
 }
 
+md-card-header .mat-card-header-text {
+  flex: 1 1 auto;
+}
+
 .cal-event-action {
   color: white;
 }
