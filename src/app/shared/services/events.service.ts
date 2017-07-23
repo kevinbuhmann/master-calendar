@@ -10,7 +10,7 @@ import { StoredEventDetail } from './events.service';
 import { FirebaseService } from './firebase.service';
 
 export interface EventDetail {
-  key?: string;
+  $key?: string;
   title: string;
   start: Date;
   end: Date;
@@ -50,7 +50,7 @@ export class EventsService {
   }
 
   addEvent(event: EventDetail) {
-    if (event.key) {
+    if (event.$key) {
       throw new Error('refusing to add event that already has a key.');
     }
 
@@ -59,20 +59,20 @@ export class EventsService {
   }
 
   updateEvent(event: EventDetail) {
-    if (!event.key) {
+    if (!event.$key) {
       throw new Error('cannot update event with missing key.');
     }
 
-    return this.firebase.set(`calendar/events/${event.key}`, this.toStoredEvent(event))
+    return this.firebase.set(`calendar/events/${event.$key}`, this.toStoredEvent(event))
       .do(() => { this.snackBarService.open('Event updated!', undefined, defaultSnackBarOptions); });
   }
 
   deleteEvent(event: EventDetail) {
-    if (!event.key) {
+    if (!event.$key) {
       throw new Error('cannot delete event with missing key.');
     }
 
-    return this.firebase.delete(`calendar/events/${event.key}`)
+    return this.firebase.delete(`calendar/events/${event.$key}`)
       .do(() => { this.snackBarService.open('Event deleted!', undefined, warnSnackBarOptions); });
   }
 
@@ -90,7 +90,7 @@ export class EventsService {
 
   private toEventDetail(event: StoredEventDetail, metadata: CalendarMetadata) {
     return {
-      key: event.$key,
+      $key: event.$key,
       title: event.title,
       start: new Date(event.start),
       end: new Date(event.end),

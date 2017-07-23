@@ -12,7 +12,7 @@ export class BaseEventViewComponent extends BaseComponent {
   }
 
   viewEvent(event: EventDetail) {
-    ViewEventDialogComponent.showDialog(this.dialogService, event.key);
+    ViewEventDialogComponent.showDialog(this.dialogService, event.$key);
   }
 
   editEvent(event: EventDetail, $event?: Event) {

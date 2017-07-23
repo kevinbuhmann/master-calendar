@@ -69,7 +69,7 @@ export class EditEventDialogComponent extends BaseComponent {
 
     Observable.forkJoin(this.eventTypes.first())
       .map(([eventTypes]) => ({
-        key: this.eventKey,
+        $key: this.eventKey,
         title: this.form.controls[controls.title].value as string,
         start: this.form.controls[controls.start].value as Date,
         end: this.form.controls[controls.end].value as Date,
@@ -86,7 +86,7 @@ export class EditEventDialogComponent extends BaseComponent {
   }
 
   setEvent(event: EventDetail) {
-    this.eventKey = event.key;
+    this.eventKey = event.$key;
 
     this.form.controls[controls.title].setValue(event.title);
     this.form.controls[controls.start].setValue(event.start);
