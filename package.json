@@ -11,7 +11,8 @@
     "build": "yarn run lint && ng build",
     "build--fix": "yarn run lint -- --fix && ng build",
     "build--prod": "yarn run lint && ng build --prod",
-    "deploy": "yarn run build--prod && firebase deploy"
+    "deploy": "yarn run build--prod && firebase deploy",
+    "seed": "ts-node ./seed/generate-database.ts"
   },
   "private": true,
   "dependencies": {
