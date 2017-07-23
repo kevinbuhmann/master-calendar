@@ -3,15 +3,15 @@
 <form [formGroup]="form" (submit)="submit()">
   <md-dialog-content>
     <md-input-container class="full-width">
-      <input mdInput placeholder="Name" [formControlName]="controls.name">
-      <md-error *ngIf="form.controls[controls.name].hasError('required')">
-        The event name is <strong>required</strong>.
+      <input mdInput placeholder="Title" [formControlName]="controls.title">
+      <md-error *ngIf="form.controls[controls.title].hasError('required')">
+        The event title is <strong>required</strong>.
       </md-error>
     </md-input-container>
 
-    <app-input-date-time placeholder="Start Date" timeStep="15" [formControlName]="controls.startDateTime"></app-input-date-time>
+    <app-input-date-time placeholder="Start" timeStep="15" [formControlName]="controls.start"></app-input-date-time>
 
-    <app-input-date-time placeholder="End Date" timeStep="15" [formControlName]="controls.endDateTime"></app-input-date-time>
+    <app-input-date-time placeholder="End" timeStep="15" [formControlName]="controls.end"></app-input-date-time>
 
     <md-input-container class="full-width">
       <input mdInput placeholder="Location" [formControlName]="controls.location">

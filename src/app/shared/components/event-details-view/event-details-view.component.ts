@@ -6,17 +6,17 @@ import { BaseComponent } from './../../../base.component';
 import { ConfirmDialogComponent } from './../../../dialogs/confirm-dialog/confirm-dialog.component';
 import { EditEventDialogComponent } from './../../../dialogs/edit-event-dialog/edit-event-dialog.component';
 import { ViewEventDialogComponent } from './../../../dialogs/view-event-dialog/view-event-dialog.component';
-import { CalendarEvent, EventsService } from './../../services/events.service';
+import { EventsService, EventDetail } from './../../services/events.service';
 
 @Component({
-  selector: 'app-event-list',
-  templateUrl: './event-list.component.html',
-  styleUrls: ['./event-list.component.scss']
+  selector: 'app-event-details-view',
+  templateUrl: './event-details-view.component.html',
+  styleUrls: ['./event-details-view.component.scss']
 })
-export class EventListComponent extends BaseComponent {
-  @Input() events: CalendarEvent[];
+export class EventDetailsViewComponent extends BaseComponent {
+  @Input() events: EventDetail[];
 
-  eventsDataSource: DataSource<CalendarEvent>;
+  eventsDataSource: DataSource<EventDetail>;
 
   constructor(private dialogService: MdDialog, private eventsService: EventsService) {
     super();
@@ -27,18 +27,18 @@ export class EventListComponent extends BaseComponent {
     };
   }
 
-  viewEvent(event: CalendarEvent) {
+  viewEvent(event: EventDetail) {
     ViewEventDialogComponent.showDialog(this.dialogService, event.key);
   }
 
-  editEvent($event: Event, event: CalendarEvent) {
+  editEvent($event: Event, event: EventDetail) {
     $event.stopPropagation();
     EditEventDialogComponent.showDialog(this.dialogService, event);
   }
 
-  deleteEvent($event: Event, event: CalendarEvent) {
+  deleteEvent($event: Event, event: EventDetail) {
     $event.stopPropagation();
-    const dialogRef = ConfirmDialogComponent.showDialog(this.dialogService, `Are you sure you want to delete the ${event.name} event?`);
+    const dialogRef = ConfirmDialogComponent.showDialog(this.dialogService, `Are you sure you want to delete the ${event.title} event?`);
 
     dialogRef.afterClosed()
       .filter(yes => yes === true)

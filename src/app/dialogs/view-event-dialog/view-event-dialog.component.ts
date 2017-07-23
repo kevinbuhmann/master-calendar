@@ -4,7 +4,7 @@ import * as isSameDay from 'date-fns/is_same_day';
 import { Observable } from 'rxjs/Observable';
 
 import { BaseComponent } from './../../base.component';
-import { CalendarEvent, EventsService } from './../../shared/services/events.service';
+import { EventsService, EventDetail } from './../../shared/services/events.service';
 
 @Component({
   selector: 'app-view-event-dialog',
@@ -12,8 +12,8 @@ import { CalendarEvent, EventsService } from './../../shared/services/events.ser
   styleUrls: ['./view-event-dialog.component.scss']
 })
 export class ViewEventDialogComponent extends BaseComponent {
-  event: Observable<CalendarEvent>;
-  endDateTimeFormat: Observable<string>;
+  event: Observable<EventDetail>;
+  endFormat: Observable<string>;
 
   constructor(
     @Inject(MD_DIALOG_DATA) private eventKey: string,
@@ -22,7 +22,7 @@ export class ViewEventDialogComponent extends BaseComponent {
     super();
 
     this.event = this.eventsService.getEvent(this.eventKey);
-    this.endDateTimeFormat = this.event.map(event => isSameDay(event.startDateTime, event.endDateTime) ? 'h:mm a' : 'MMM d, y h:mm a');
+    this.endFormat = this.event.map(event => isSameDay(event.start, event.end) ? 'h:mm a' : 'MMM d, y h:mm a');
   }
 
   static showDialog(dialogService: MdDialog, eventKey: string) {

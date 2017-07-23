@@ -1,0 +1,32 @@
+<md-table #table [dataSource]="eventsDataSource">
+  <ng-container cdkColumnDef="title">
+    <md-header-cell *cdkHeaderCellDef>Title</md-header-cell>
+    <md-cell *cdkCellDef="let event">{{ event.title }}</md-cell>
+  </ng-container>
+
+  <ng-container cdkColumnDef="start">
+    <md-header-cell *cdkHeaderCellDef>Start</md-header-cell>
+    <md-cell *cdkCellDef="let event">{{ event.start | date:'MMM d, y h:mm a' }}</md-cell>
+  </ng-container>
+
+  <ng-container cdkColumnDef="end">
+    <md-header-cell *cdkHeaderCellDef>End</md-header-cell>
+    <md-cell *cdkCellDef="let event">{{ event.end | date:'MMM d, y h:mm a' }}</md-cell>
+  </ng-container>
+
+  <ng-container cdkColumnDef="location">
+    <md-header-cell *cdkHeaderCellDef>Location</md-header-cell>
+    <md-cell *cdkCellDef="let event">{{ event.location }}</md-cell>
+  </ng-container>
+
+  <ng-container cdkColumnDef="actions">
+    <md-header-cell *cdkHeaderCellDef></md-header-cell>
+    <md-cell *cdkCellDef="let event">
+      <button md-button (click)="editEvent($event, event)"><i class="material-icons">create</i></button>
+      <button md-button (click)="deleteEvent($event, event)"><i class="material-icons">delete</i></button>
+    </md-cell>
+  </ng-container>
+
+  <md-header-row *cdkHeaderRowDef="['title', 'start', 'end', 'location', 'actions']"></md-header-row>
+  <md-row *cdkRowDef="let event; columns: ['title', 'start', 'end', 'location', 'actions'];" class="event-row" (click)="viewEvent(event)"></md-row>
+</md-table>

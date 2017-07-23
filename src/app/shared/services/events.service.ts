@@ -4,20 +4,20 @@ import { MdSnackBar } from '@angular/material';
 import { defaultSnackBarOptions, warnSnackBarOptions } from './../constants';
 import { FirebaseService } from './firebase.service';
 
-export interface CalendarEvent {
+export interface EventDetail {
   key?: string;
-  name: string;
-  startDateTime: Date;
-  endDateTime: Date;
+  title: string;
+  start: Date;
+  end: Date;
   location: string;
   description: string;
 }
 
-interface StoredEvent {
+interface StoredEventDetail {
   $key?: string;
-  name: string;
-  startDateTime: string;
-  endDateTime: string;
+  title: string;
+  start: string;
+  end: string;
   location: string;
   description: string;
 }
@@ -27,17 +27,17 @@ export class EventsService {
   constructor(public snackBarService: MdSnackBar, private firebase: FirebaseService) { }
 
   getEvents() {
-    return this.firebase.list<StoredEvent>('events')
+    return this.firebase.list<StoredEventDetail>('events')
       .map(events => events.map(event => this.toCalendarEvent(event)))
-      .map(events => events.sort((event1, event2) => event2.startDateTime.getTime() - event1.startDateTime.getTime()));
+      .map(events => events.sort((event1, event2) => event2.start.getTime() - event1.start.getTime()));
   }
 
   getEvent(eventKey: string) {
-    return this.firebase.object<StoredEvent>(`events/${eventKey}`)
+    return this.firebase.object<StoredEventDetail>(`events/${eventKey}`)
       .map(event => this.toCalendarEvent(event));
   }
 
-  addEvent(event: CalendarEvent) {
+  addEvent(event: EventDetail) {
     if (event.key) {
       throw new Error('refusing to add event that already has a key.');
     }
@@ -46,7 +46,7 @@ export class EventsService {
       .do(() => { this.snackBarService.open('Event added!', undefined, defaultSnackBarOptions); });
   }
 
-  updateEvent(event: CalendarEvent) {
+  updateEvent(event: EventDetail) {
     if (!event.key) {
       throw new Error('cannot update event with missing key.');
     }
@@ -55,7 +55,7 @@ export class EventsService {
       .do(() => { this.snackBarService.open('Event updated!', undefined, defaultSnackBarOptions); });
   }
 
-  deleteEvent(event: CalendarEvent) {
+  deleteEvent(event: EventDetail) {
     if (!event.key) {
       throw new Error('cannot delete event with missing key.');
     }
@@ -64,24 +64,24 @@ export class EventsService {
       .do(() => { this.snackBarService.open('Event deleted!', undefined, warnSnackBarOptions); });
   }
 
-  private toStoredEvent(event: CalendarEvent) {
+  private toStoredEvent(event: EventDetail) {
     return {
-      name: event.name || null,
-      startDateTime: event.startDateTime ? event.startDateTime.toISOString() : null,
-      endDateTime: event.endDateTime ? event.endDateTime.toISOString() : null,
+      title: event.title || null,
+      start: event.start ? event.start.toISOString() : null,
+      end: event.end ? event.end.toISOString() : null,
       location: event.location || null,
       description: event.description || null
-    } as StoredEvent;
+    } as StoredEventDetail;
   }
 
-  private toCalendarEvent(event: StoredEvent) {
+  private toCalendarEvent(event: StoredEventDetail) {
     return {
       key: event.$key,
-      name: event.name,
-      startDateTime: new Date(event.startDateTime),
-      endDateTime: new Date(event.endDateTime),
+      title: event.title,
+      start: new Date(event.start),
+      end: new Date(event.end),
       location: event.location,
       description: event.description
-    } as CalendarEvent;
+    } as EventDetail;
   }
 }

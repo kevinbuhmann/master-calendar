@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { BaseComponent } from './../../base.component';
-import { CalendarEvent, EventsService } from './../../shared/services/events.service';
+import { EventsService, EventDetail } from './../../shared/services/events.service';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +10,7 @@ import { CalendarEvent, EventsService } from './../../shared/services/events.ser
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent extends BaseComponent {
-  readonly events: Observable<CalendarEvent[]>;
+  readonly events: Observable<EventDetail[]>;
 
   constructor(private eventsService: EventsService) {
     super();

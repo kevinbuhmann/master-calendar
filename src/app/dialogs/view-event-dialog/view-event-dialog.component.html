@@ -1,9 +1,9 @@
 <div *ngIf="event | async; let event">
-  <h2 mdDialogTitle>{{ event.name }}</h2>
+  <h2 mdDialogTitle>{{ event.title }}</h2>
 
   <h3>When?</h3>
   <p>
-    {{ event.startDateTime | date:'MMM d, y h:mm a' }} until {{ event.endDateTime | date:(endDateTimeFormat | async) }}
+    {{ event.start | date:'MMM d, y h:mm a' }} until {{ event.end | date:(endFormat | async) }}
   </p>
 
   <h3>Where?</h3>

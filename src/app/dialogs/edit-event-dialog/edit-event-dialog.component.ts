@@ -4,12 +4,12 @@ import { MdDialog, MdDialogConfig, MdDialogRef } from '@angular/material';
 import * as addHours from 'date-fns/add_hours';
 import { BaseComponent } from './../../base.component';
 
-import { CalendarEvent, EventsService } from './../../shared/services/events.service';
+import { EventsService, EventDetail } from './../../shared/services/events.service';
 
 const controls = {
-  name: 'name',
-  startDateTime: 'startDateTime',
-  endDateTime: 'endDateTime',
+  title: 'title',
+  start: 'start',
+  end: 'end',
   location: 'location',
   description: 'description'
 };
@@ -34,15 +34,15 @@ export class EditEventDialogComponent extends BaseComponent {
     super();
 
     this.form = this.formBuilder.group({
-      [controls.name]: ['', [Validators.required]],
-      [controls.startDateTime]: [new Date(), [Validators.required]],
-      [controls.endDateTime]: [addHours(new Date(), 1), [Validators.required]],
+      [controls.title]: ['', [Validators.required]],
+      [controls.start]: [new Date(), [Validators.required]],
+      [controls.end]: [addHours(new Date(), 1), [Validators.required]],
       [controls.location]: ['', [Validators.required]],
       [controls.description]: ['', [Validators.required]]
     });
   }
 
-  static showDialog(dialogService: MdDialog, event?: CalendarEvent) {
+  static showDialog(dialogService: MdDialog, event?: EventDetail) {
     const dialogOptions: MdDialogConfig = {
       width: '500px',
       position: { top: '100px' }
@@ -58,11 +58,11 @@ export class EditEventDialogComponent extends BaseComponent {
   }
 
   submit() {
-    const event: CalendarEvent = {
+    const event: EventDetail = {
       key: this.eventKey,
-      name: this.form.controls[controls.name].value as string,
-      startDateTime: this.form.controls[controls.startDateTime].value as Date,
-      endDateTime: this.form.controls[controls.endDateTime].value as Date,
+      title: this.form.controls[controls.title].value as string,
+      start: this.form.controls[controls.start].value as Date,
+      end: this.form.controls[controls.end].value as Date,
       location: this.form.controls[controls.location].value as string,
       description: this.form.controls[controls.description].value as string
     };
@@ -77,12 +77,12 @@ export class EditEventDialogComponent extends BaseComponent {
     this.dialogRef.close();
   }
 
-  setEvent(event: CalendarEvent) {
+  setEvent(event: EventDetail) {
     this.eventKey = event.key;
 
-    this.form.controls[controls.name].setValue(event.name);
-    this.form.controls[controls.startDateTime].setValue(event.startDateTime);
-    this.form.controls[controls.endDateTime].setValue(event.endDateTime);
+    this.form.controls[controls.title].setValue(event.title);
+    this.form.controls[controls.start].setValue(event.start);
+    this.form.controls[controls.end].setValue(event.end);
     this.form.controls[controls.location].setValue(event.location);
     this.form.controls[controls.description].setValue(event.description);
   }
