@@ -1,8 +1,8 @@
 <md-card *ngIf="event | async; let event">
   <md-card-header>
     <md-card-title>{{ event.title }}</md-card-title>
-    <md-card-subtitle><i class="material-icons">today</i><span class="label">{{ event.start | date:'MMM d, y h:mm a' }} until {{ event.end | date:(endFormat | async) }}</span></md-card-subtitle>
-    <md-card-subtitle><i class="material-icons">location_on</i><span class="label">{{ event.location.address }}</span></md-card-subtitle>
+    <md-card-subtitle><md-icon>today</md-icon><span class="label">{{ event.start | date:'MMM d, y h:mm a' }} until {{ event.end | date:(endFormat | async) }}</span></md-card-subtitle>
+    <md-card-subtitle><md-icon>location_on</md-icon><span class="label">{{ event.location.address }}</span></md-card-subtitle>
   </md-card-header>
   <img *ngIf="event.imageUrl" md-card-image [src]="event.imageUrl" />
   <md-card-content>

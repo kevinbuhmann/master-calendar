@@ -6,9 +6,9 @@
     <md-option class="bold-option" value="week">Week View</md-option>
     <md-option class="bold-option" value="day">Day View</md-option>
   </md-select>
-  <button md-icon-button mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"><i class="material-icons">keyboard_arrow_left</i></button>
-  <button md-icon-button mwlCalendarToday [(viewDate)]="viewDate"><i class="material-icons">today</i></button>
-  <button md-icon-button mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"><i class="material-icons">keyboard_arrow_right</i></button>
+  <button md-icon-button mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"><md-icon>keyboard_arrow_left</md-icon></button>
+  <button md-icon-button mwlCalendarToday [(viewDate)]="viewDate"><md-icon>today</md-icon></button>
+  <button md-icon-button mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"><md-icon>keyboard_arrow_right</md-icon></button>
 </md-toolbar>
 
 <div [ngSwitch]="view">

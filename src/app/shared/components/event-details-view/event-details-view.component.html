@@ -27,8 +27,8 @@
   <ng-container cdkColumnDef="actions">
     <md-header-cell *cdkHeaderCellDef></md-header-cell>
     <md-cell *cdkCellDef="let event">
-      <button md-icon-button (click)="editEvent(event, $event)"><i class="material-icons">create</i></button>
-      <button md-icon-button (click)="deleteEvent(event, $event)"><i class="material-icons">delete</i></button>
+      <button md-icon-button (click)="editEvent(event, $event)"><md-icon>create</md-icon></button>
+      <button md-icon-button (click)="deleteEvent(event, $event)"><md-icon>delete</md-icon></button>
     </md-cell>
   </ng-container>
 
