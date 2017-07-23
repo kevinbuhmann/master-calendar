@@ -21,8 +21,12 @@ body {
   margin: 0;
 }
 
+.warn-text {
+  color: $color-warn;
+}
+
 .warn-dialog .mat-dialog-container {
-  background: 3px $color-warn solid;
+  border: 3px $color-warn solid;
 }
 
 .warn-snack-bar {
