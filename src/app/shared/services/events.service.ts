@@ -100,8 +100,8 @@ export class EventsService {
       location: event.location,
       imageUrl: event.imageUrl,
       description: event.description,
-      type: metadata.eventTypes[event.type],
-      tags: (event.tags || []).map(tag => metadata.eventTags[tag])
+      type: { $key: event.type, ...metadata.eventTypes[event.type] },
+      tags: (event.tags || []).map(tag => ({ $key: tag, ...metadata.eventTags[tag] }))
     } as EventDetail;
   }
 }

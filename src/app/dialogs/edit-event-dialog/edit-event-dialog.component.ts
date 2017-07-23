@@ -24,7 +24,7 @@ const controls = {
   styleUrls: ['./edit-event-dialog.component.scss']
 })
 export class EditEventDialogComponent extends BaseComponent {
-  eventKey: string;
+  originalEvent: EventDetail;
 
   readonly form: FormGroup;
   readonly controls = controls;
@@ -72,7 +72,7 @@ export class EditEventDialogComponent extends BaseComponent {
 
     Observable.forkJoin(this.eventTypes.first())
       .map(([eventTypes]) => ({
-        $key: this.eventKey,
+        ...(this.originalEvent || { }),
         title: this.form.controls[controls.title].value as string,
         start: this.form.controls[controls.start].value as Date,
         end: this.form.controls[controls.end].value as Date,
@@ -81,7 +81,8 @@ export class EditEventDialogComponent extends BaseComponent {
         imageUrl: this.form.controls[controls.imageUrl].value as string,
         type: eventTypes.find(eventType => eventType.name === eventTypeName)
       } as EventDetail))
-      .switchMap(event => (this.eventKey ? this.eventsService.updateEvent(event) : this.eventsService.addEvent(event)).mapTo(event))
+      .do(value => { console.log('value', value); }, error => { console.log('error', error); })
+      .switchMap(event => (this.originalEvent ? this.eventsService.updateEvent(event) : this.eventsService.addEvent(event)).mapTo(event))
       .subscribe(event => { this.dialogRef.close(event); });
   }
 
@@ -90,7 +91,7 @@ export class EditEventDialogComponent extends BaseComponent {
   }
 
   setEvent(event: EventDetail) {
-    this.eventKey = event.$key;
+    this.originalEvent = event;
 
     this.form.controls[controls.title].setValue(event.title);
     this.form.controls[controls.start].setValue(event.start);
