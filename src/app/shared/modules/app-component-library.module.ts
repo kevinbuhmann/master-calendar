@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import {
   MdAutocompleteModule,
   MdButtonModule,
+  MdCardModule,
   MdChipsModule,
   MdDatepickerModule,
   MdInputModule,
@@ -15,11 +16,13 @@ import {
   MdTooltipModule
 } from '@angular/material';
 import { CalendarModule } from 'angular-calendar';
+import { ImageUploadModule } from 'ng2-imageupload';
 
 const materialModules = [
   CdkTableModule,
   MdAutocompleteModule,
   MdButtonModule,
+  MdCardModule,
   MdChipsModule,
   MdDatepickerModule,
   MdInputModule,
@@ -35,11 +38,13 @@ const materialModules = [
 @NgModule({
   imports: [
     ...materialModules,
-    CalendarModule.forRoot()
+    CalendarModule.forRoot(),
+    ImageUploadModule
   ],
   exports: [
     ...materialModules,
-    CalendarModule
+    CalendarModule,
+    ImageUploadModule
   ]
 })
 export class AppComponentLibraryModule { }

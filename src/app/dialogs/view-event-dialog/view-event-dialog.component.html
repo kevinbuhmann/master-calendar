@@ -1,23 +1,16 @@
-<div *ngIf="event | async; let event">
-  <h2 mdDialogTitle>{{ event.title }}</h2>
-
-  <h3>When?</h3>
-  <p>
-    {{ event.start | date:'MMM d, y h:mm a' }} until {{ event.end | date:(endFormat | async) }}
-  </p>
-
-  <h3>Where?</h3>
-  <p>
-    {{ event.location }}
-  </p>
-
-  <h3>What is it?</h3>
-  <p *ngIf="event.type">
-    This is <strong>{{ event.type.name }}</strong> event. ({{ event.type.description }})
-  </p>
-  <div [innerHTML]="event.description | appMarkdown"></div>
-
-  <md-chip-list disabled>
-    <md-chip *ngFor="let tag of event.tags" [mdTooltip]="tag.description" mdTooltipPosition="above" disabled>{{ tag.name }}</md-chip>
-  </md-chip-list>
-</div>
+<md-card *ngIf="event | async; let event">
+  <md-card-header>
+    <md-card-title>{{ event.title }}</md-card-title>
+    <md-card-subtitle>{{ event.start | date:'MMM d, y h:mm a' }} until {{ event.end | date:(endFormat | async) }}</md-card-subtitle>
+    <md-card-subtitle>{{ event.location }}</md-card-subtitle>
+  </md-card-header>
+  <md-card-content>
+    <p *ngIf="event.type">
+      This is <strong>{{ event.type.name }}</strong> event. ({{ event.type.description }})
+    </p>
+    <div [innerHTML]="event.description | appMarkdown"></div>
+    <md-chip-list disabled>
+      <md-chip *ngFor="let tag of event.tags" [mdTooltip]="tag.description" mdTooltipPosition="above" disabled>{{ tag.name }}</md-chip>
+    </md-chip-list>
+  </md-card-content>
+</md-card>

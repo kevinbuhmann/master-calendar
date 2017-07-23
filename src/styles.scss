@@ -45,6 +45,10 @@ body {
   border: 3px $color-warn solid;
 }
 
+.no-padding-dialog .mat-dialog-container {
+  padding: 0;
+}
+
 .warn-snack-bar {
   background: $color-warn !important;
 }

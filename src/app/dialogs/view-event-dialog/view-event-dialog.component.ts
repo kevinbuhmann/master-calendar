@@ -29,7 +29,8 @@ export class ViewEventDialogComponent extends BaseComponent {
     const dialogOptions: MdDialogConfig = {
       data: eventKey,
       width: '500px',
-      position: { top: '100px' }
+      position: { top: '100px' },
+      panelClass: 'no-padding-dialog'
     };
 
     const dialogRef = dialogService.open(ViewEventDialogComponent, dialogOptions);
