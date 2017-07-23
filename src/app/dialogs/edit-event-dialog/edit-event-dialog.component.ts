@@ -40,15 +40,22 @@ export class EditEventDialogComponent extends BaseComponent {
 
     this.eventTypes = this.eventMetadataService.getEventTypesAsArray().shareReplay();
 
+    const now = new Date();
+    const start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours());
+    const end = addHours(start, 1);
+
     this.form = this.formBuilder.group({
       [controls.title]: ['', [Validators.required]],
-      [controls.start]: [new Date(), [Validators.required]],
-      [controls.end]: [addHours(new Date(), 1), [Validators.required]],
+      [controls.start]: [null, [Validators.required]],
+      [controls.end]: [null, [Validators.required]],
       [controls.location]: ['', [Validators.required]],
       [controls.eventTypeName]: [null, [Validators.required]],
       [controls.imageUrl]: [null],
       [controls.description]: ['', [Validators.required]]
     });
+
+    this.form.controls[controls.start].setValue(start);
+    this.form.controls[controls.end].setValue(end);
   }
 
   static showDialog(dialogService: MdDialog, event?: EventDetail) {
