@@ -14,14 +14,20 @@ export class EventFilterComponent extends BaseComponent {
   @Input() filter = showAllEventFilter;
   @Output() filterChange = new EventEmitter<EventFilter>();
 
+  readonly locations: Observable<string[]>;
   readonly tags: Observable<string[]>;
   readonly types: Observable<string[]>;
 
   constructor(private eventMetadataService: EventMetadataService) {
     super();
 
+    this.locations = this.getLocations().shareReplay(1);
     this.tags = this.getTags().shareReplay(1);
     this.types = this.getTypes().shareReplay(1);
+  }
+
+  updateLocationFilter(value: string) {
+    this.filterChange.next({ ...this.filter, location: value });
   }
 
   updateTagFilter(value: string) {
@@ -30,6 +36,11 @@ export class EventFilterComponent extends BaseComponent {
 
   updateTypeFilter(value: string) {
     this.filterChange.next({ ...this.filter, type: value });
+  }
+
+  private getLocations() {
+    return this.eventMetadataService.getEventLocationsAsArray()
+      .map(locations => locations.map(location => location.address));
   }
 
   private getTags() {

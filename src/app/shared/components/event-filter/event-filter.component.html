@@ -1,11 +1,17 @@
 <div bp-layout="row">
-  <div bp-layout="col 6@md" class="padding-top-24">
+  <div bp-layout="col 4@md" class="padding-top-24">
+    <md-select class="full-width" placeholder="Filter by event location" [ngModel]="filter.location" (ngModelChange)="updateLocationFilter($event)">
+      <md-option value="">Show all event locations</md-option>
+      <md-option *ngFor="let location of locations | async" [value]="location">{{ location }}</md-option>
+    </md-select>
+  </div>
+  <div bp-layout="col 4@md" class="padding-top-24">
     <md-select class="full-width" placeholder="Filter by event tag" [ngModel]="filter.tag" (ngModelChange)="updateTagFilter($event)">
       <md-option value="">Show all event tags</md-option>
       <md-option *ngFor="let tag of tags | async" [value]="tag">{{ tag }}</md-option>
     </md-select>
   </div>
-  <div bp-layout="col 6@md" class="padding-top-24">
+  <div bp-layout="col 4@md" class="padding-top-24">
     <md-select class="full-width" placeholder="Filter by event type" [ngModel]="filter.type" (ngModelChange)="updateTypeFilter($event)">
       <md-option value="">Show all event types</md-option>
       <md-option *ngFor="let type of types | async" [value]="type">{{ type }}</md-option>

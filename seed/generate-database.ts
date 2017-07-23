@@ -3,7 +3,7 @@ import { readFileSync, writeFileSync } from 'fs';
 
 import { Database } from '../src/app/shared/database';
 import { firebaseConfig } from './../src/app/shared/firebase-config';
-import { EventTag, EventType } from './../src/app/shared/services/event-metadata.service';
+import { EventLocation, EventTag, EventType } from './../src/app/shared/services/event-metadata.service';
 import { StoredEventDetail } from './../src/app/shared/services/events.service';
 
 interface MockData {
@@ -37,6 +37,13 @@ const shortDescriptions = descriptions
   .filter(description => description.length > 0)
   .map(description => `${description}.`);
 
+const eventLocations = data
+  .slice(0, 25)
+  .map(mock => makeEventLocation(mock.location))
+  .reduce((map, value) => { map[ref.push().key] = value; return map; }, {});
+
+const eventLocationKeys = Object.keys(eventLocations);
+
 const eventTags = data
   .slice(0, 25)
   .map(mock => makeEventTag(mock.buzzword, mock.color))
@@ -58,6 +65,7 @@ const events = data
 const database: Database = {
   calendar: {
     events, metadata: {
+      eventLocations,
       eventTags,
       eventTypes
     }
@@ -68,6 +76,12 @@ writeFileSync('./seed/database.json', JSON.stringify(database, undefined, 4));
 
 ref.set(database)
   .then(() => { app.database().goOffline(); });
+
+function makeEventLocation(location: string) {
+  return {
+    address: location
+  } as EventLocation;
+}
 
 function makeEventType(type: string, color: string) {
   return {
@@ -87,10 +101,10 @@ function makeEventTag(buzzword: string, color: string) {
 function makeEvent(catchphrase: string, location: string) {
   return {
     title: catchphrase,
-    location,
     ...randomDates(),
     tagKeys: randomTagKeys(),
     imageUrl: null,
+    locationKey: eventLocationKeys[Math.floor(Math.random() * eventLocationKeys.length)],
     typeKey: eventTypeKeys[Math.floor(Math.random() * eventTypeKeys.length)],
     description: descriptions[Math.floor(Math.random() * descriptions.length)]
   } as StoredEventDetail;

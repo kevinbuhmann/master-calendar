@@ -16,7 +16,7 @@
 
   <ng-container cdkColumnDef="location">
     <md-header-cell *cdkHeaderCellDef>Location</md-header-cell>
-    <md-cell *cdkCellDef="let event">{{ event.location }}</md-cell>
+    <md-cell *cdkCellDef="let event">{{ event.location ? event.location.address : 'Unknown' }}</md-cell>
   </ng-container>
 
   <ng-container cdkColumnDef="type">

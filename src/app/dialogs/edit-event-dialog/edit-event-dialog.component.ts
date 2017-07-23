@@ -5,14 +5,14 @@ import * as addHours from 'date-fns/add_hours';
 import { Observable } from 'rxjs/Observable';
 
 import { BaseComponent } from './../../base.component';
-import { EventMetadataService, EventType } from './../../shared/services/event-metadata.service';
+import { EventLocation, EventMetadataService, EventType } from './../../shared/services/event-metadata.service';
 import { EventsService, EventDetail } from './../../shared/services/events.service';
 
 const controls = {
   title: 'title',
   start: 'start',
   end: 'end',
-  location: 'location',
+  eventLocationAddress: 'eventLocationAddress',
   eventTypeName: 'eventTypeName',
   imageUrl: 'imageUrl',
   description: 'description'
@@ -29,6 +29,7 @@ export class EditEventDialogComponent extends BaseComponent {
   readonly form: FormGroup;
   readonly controls = controls;
   readonly eventTypes: Observable<EventType[]>;
+  readonly eventLocations: Observable<EventLocation[]>;
 
   constructor (
     private formBuilder: FormBuilder,
@@ -39,6 +40,7 @@ export class EditEventDialogComponent extends BaseComponent {
     super();
 
     this.eventTypes = this.eventMetadataService.getEventTypesAsArray().shareReplay();
+    this.eventLocations = this.eventMetadataService.getEventLocationsAsArray().shareReplay();
 
     const now = new Date();
     const start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours());
@@ -48,7 +50,7 @@ export class EditEventDialogComponent extends BaseComponent {
       [controls.title]: ['', [Validators.required]],
       [controls.start]: [null, [Validators.required]],
       [controls.end]: [null, [Validators.required]],
-      [controls.location]: ['', [Validators.required]],
+      [controls.eventLocationAddress]: ['', [Validators.required]],
       [controls.eventTypeName]: [null, [Validators.required]],
       [controls.imageUrl]: [null],
       [controls.description]: ['', [Validators.required]]
@@ -75,17 +77,18 @@ export class EditEventDialogComponent extends BaseComponent {
   }
 
   submit() {
+    const locationAddress = this.form.controls[controls.eventLocationAddress].value as string;
     const eventTypeName = this.form.controls[controls.eventTypeName].value as string;
 
-    Observable.forkJoin(this.eventTypes.first())
-      .map(([eventTypes]) => ({
+    Observable.forkJoin(this.eventTypes.first(), this.eventLocations.first())
+      .map(([eventTypes, locations]) => ({
         ...(this.originalEvent || { }),
         title: this.form.controls[controls.title].value as string,
         start: this.form.controls[controls.start].value as Date,
         end: this.form.controls[controls.end].value as Date,
-        location: this.form.controls[controls.location].value as string,
         description: this.form.controls[controls.description].value as string,
         imageUrl: this.form.controls[controls.imageUrl].value as string,
+        location: locations.find(location => location.address === locationAddress),
         type: eventTypes.find(eventType => eventType.name === eventTypeName)
       } as EventDetail))
       .switchMap(event => (this.originalEvent ? this.eventsService.updateEvent(event) : this.eventsService.addEvent(event)).mapTo(event))
@@ -102,7 +105,7 @@ export class EditEventDialogComponent extends BaseComponent {
     this.form.controls[controls.title].setValue(event.title);
     this.form.controls[controls.start].setValue(event.start);
     this.form.controls[controls.end].setValue(event.end);
-    this.form.controls[controls.location].setValue(event.location);
+    this.form.controls[controls.eventLocationAddress].setValue(event.location.address);
     this.form.controls[controls.eventTypeName].setValue(event.type.name);
     this.form.controls[controls.imageUrl].setValue(event.imageUrl);
     this.form.controls[controls.description].setValue(event.description);

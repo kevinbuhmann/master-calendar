@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { defaultSnackBarOptions, warnSnackBarOptions } from './../constants';
 import { Calendar, CalendarMetadata } from './../database';
 import { mapToArray } from './../helpers/object.helpers';
-import { EventMetadataService, EventTag, EventType } from './event-metadata.service';
+import { EventLocation, EventMetadataService, EventTag, EventType } from './event-metadata.service';
 import { StoredEventDetail } from './events.service';
 import { FirebaseService } from './firebase.service';
 
@@ -14,9 +14,9 @@ export interface EventDetail {
   title: string;
   start: Date;
   end: Date;
-  location: string;
   imageUrl: string;
   description: string;
+  location: EventLocation;
   tags?: EventTag[];
   type?: EventType;
 }
@@ -26,9 +26,9 @@ export interface StoredEventDetail {
   title: string;
   start: string;
   end: string;
-  location: string;
   imageUrl: string;
   description: string;
+  locationKey: string;
   typeKey: string;
   tagKeys: string[];
 }
@@ -83,9 +83,9 @@ export class EventsService {
       title: event.title || null,
       start: event.start ? event.start.toISOString() : null,
       end: event.end ? event.end.toISOString() : null,
-      location: event.location || null,
       imageUrl: event.imageUrl || null,
       description: event.description || null,
+      locationKey: event.location ? event.location.$key || null : null,
       typeKey: event.type ? event.type.$key || null : null,
       tagKeys: event.tags ? event.tags.map(tag => tag.$key || null) : null
     } as StoredEventDetail;
@@ -97,9 +97,9 @@ export class EventsService {
       title: event.title,
       start: new Date(event.start),
       end: new Date(event.end),
-      location: event.location,
       imageUrl: event.imageUrl,
       description: event.description,
+      location: { $key: event.locationKey, ...metadata.eventLocations[event.locationKey] },
       type: { $key: event.typeKey, ...metadata.eventTypes[event.typeKey] },
       tags: (event.tagKeys || []).map(tagKey => ({ $key: tagKey, ...metadata.eventTags[tagKey] }))
     } as EventDetail;

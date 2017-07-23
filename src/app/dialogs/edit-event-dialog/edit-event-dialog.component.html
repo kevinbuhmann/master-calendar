@@ -22,11 +22,16 @@
       <div bp-layout="row">
         <div bp-layout="col 6@md" class="no-padding-bottom">
           <md-input-container class="full-width">
-            <input mdInput placeholder="Location" [formControlName]="controls.location">
-            <md-error *ngIf="form.controls[controls.location].hasError('required')">
+            <input mdInput placeholder="Location" [formControlName]="controls.eventLocationAddress" [mdAutocomplete]="eventLocationAutocomplete">
+            <md-error *ngIf="form.controls[controls.eventLocationAddress].hasError('required')">
               The event location is <strong>required</strong>.
             </md-error>
           </md-input-container>
+          <md-autocomplete #eventLocationAutocomplete="mdAutocomplete">
+            <md-option *ngFor="let eventLocation of eventLocations | async" [value]="eventLocation.address">
+              <span>{{ eventLocation.address }}</span>
+            </md-option>
+          </md-autocomplete>
         </div>
         <div bp-layout="col 6@md" class="no-padding-bottom">
           <md-input-container class="full-width">

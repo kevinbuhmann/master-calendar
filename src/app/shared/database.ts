@@ -1,5 +1,5 @@
 import { SimpleMap } from './helpers/object.helpers';
-import { EventTag, EventType } from './services/event-metadata.service';
+import { EventLocation, EventTag, EventType } from './services/event-metadata.service';
 import { StoredEventDetail } from './services/events.service';
 
 export interface Database {
@@ -12,6 +12,7 @@ export interface Calendar {
 }
 
 export interface CalendarMetadata {
+  eventLocations: SimpleMap<EventLocation>;
   eventTags: SimpleMap<EventTag>;
   eventTypes: SimpleMap<EventType>;
 }
