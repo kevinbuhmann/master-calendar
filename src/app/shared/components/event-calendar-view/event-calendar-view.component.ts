@@ -40,7 +40,7 @@ export class EventCalendarViewComponent extends BaseEventViewComponent {
   constructor(dialogService: MdDialog, eventsService: EventsService) {
     super(dialogService, eventsService);
 
-    this.calendarEvents = this.getCalendarEvents();
+    this.calendarEvents = this.getCalendarEvents().shareReplay(1);
   }
 
   dayClick({ date, events }: { date: Date; events: CalendarEvent<EventDetail>[] }) {

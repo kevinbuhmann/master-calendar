@@ -16,6 +16,6 @@ export class HomeComponent extends BaseComponent {
   constructor(private eventsService: EventsService) {
     super();
 
-    this.events = this.eventsService.getEvents();
+    this.events = this.eventsService.getEvents().shareReplay(1);
   }
 }
